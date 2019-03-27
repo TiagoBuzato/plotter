@@ -1,0 +1,21 @@
+{
+  "configBD": {
+    "typeDB": "mongodb",
+    "host" : "localhost",
+    "port" : 27017,
+    "dbs" : "test",
+    "collection" : "points_rgerange40"
+  },
+  "fields" : [
+    "occurrences",
+    "ea",
+    "lightning",
+    "PRECTOT",
+    "PS",
+    "QV2M",
+    "SLP",
+    "T2M",
+    "I2M",
+    "I10M"
+  ]
+}
