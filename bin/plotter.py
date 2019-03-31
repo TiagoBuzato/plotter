@@ -21,7 +21,7 @@ __status__ = "Development"
 # [E] -> Erro
 
 import pandas as pd
-import core.tools as tools
+import bin.tools as tools
 
 class Plotter():
     def __init__(self, typedate, dfextracted, locate, logger, verbose=False):
