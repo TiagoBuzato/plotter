@@ -3,3 +3,6 @@ core/_pycache_
 *.log
 .idea
 input/
+__pycache__/
+bin/__pycache__/
+configinit/__pycache__/
