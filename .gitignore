@@ -2,3 +2,4 @@ core/_pycache_
 *.png
 *.log
 .idea
+input/
