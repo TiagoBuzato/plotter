@@ -26,6 +26,13 @@ def run(rootpath, logger, settings: Settings, verbose=False):
         logger.info('[I] Starting file treat with those source: gfs: {gfs}, ncap: {ncap}, wrf: {wrf}'.format(
             gfs=settings.gfssource, ncap=settings.ncapsource, wrf=settings.wrfsource))
 
-        Loading(rootpath, settings.gfssource, settings.ncapsource, settings.wrfsource, logger, verbose).run()
+        dfgfs, dfncap, dfwrf = Loading(rootpath, settings.gfssource, settings.ncapsource, settings.wrfsource, logger,
+                                       verbose).run()
+
+        print(dfgfs.head(5))
+        print(dfncap.head(5))
+        print(dfwrf.head(5))
+
+        exit(0)
 
     return
