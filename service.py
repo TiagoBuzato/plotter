@@ -34,15 +34,15 @@ parser.add_argument("-v", "--verbose", action='store_true', dest='verbose', help
 parser.add_argument("-conff", "--config-file", type=str, dest='config_ini',
                     help="Configuração de inicialização. ", default=None)
 
-parser.add_argument("-s", "--source", nargs='*', type=str, dest='source',
+parser.add_argument("-s", "--source", type=str, dest='source',
                     help="Choose what the source data from. [db|file]", default=False)
 
-parser.add_argument("-g", "--graphics", nargs='*', type=str, dest='graphics',
-                    help="Operation to list what the graphics the system will need to make.", default=False)
+parser.add_argument("-lg", "--line_graphics", action='store_true', dest='line_graphics',
+                    help="System will make graphics of line.", default=False)
 
-parser.add_argument("-dg", "--diary_graphics", nargs='*', type=str, dest='diary_graphics',
-                    help="Operation to make the graphics for range. It's waiting for begin and end date and locate "
-                         "example:<2017-06-08T00:00:00Z 2017-06-08T23:59:59Z [lat, lon]>", default=False)
+# parser.add_argument("-dg", "--diary_graphics", nargs='*', type=str, dest='diary_graphics',
+#                     help="Operation to make the graphics for range. It's waiting for begin and end date and locate "
+#                          "example:<2017-06-08T00:00:00Z 2017-06-08T23:59:59Z [lat, lon]>", default=False)
 
 # parser.add_argument("-tg", "--graphics_type", nargs='*', type=str, dest='graphics_type',
 #                     help="Operation to list the kind os graphics the users want to see.", default=False)
@@ -60,15 +60,27 @@ if __name__=="__main__":
     settings = Settings()
 
     if args.source:
-        if args.source[0] == "file":
+        if args.source == "file":
             print("[I] The files will be treat.")
             logger.info("The files will be treat.")
 
             settings.filesource = args.source
 
+            if args.line_graphics:
+                print("[I] Line graphics will be make.")
+                logger.info("Line graphics will be make.")
+
+                settings.linegraphic = args.line_graphics
+
+            else:
+                print("[I] It's necessary choose a graphic kind [-lg].")
+                logger.info("It's necessary choose a graphic kind [-lg].")
+
     else:
         print("[I] It's necessary to pass data source like [db|file].")
         logger.info("It's necessary to pass data source like [db|file].")
+
+
 
     print('[I] Into the controller.')
     logger.info('Into the controller.')

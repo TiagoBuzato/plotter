@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import sys
 from configinit.settings import Settings
 from bin.loading import Loading
+from bin.line_graphic import Line_graphic
 
 '''
     File name: controller.py
@@ -28,11 +30,10 @@ def run(rootpath, logger, settings: Settings, verbose=False):
 
         dfgfs, dfncap, dfwrf = Loading(rootpath, settings.gfssource, settings.ncapsource, settings.wrfsource, logger,
                                        verbose).run()
+    if settings.linegraphic:
+        print('[I] Starting line graphic for gfs, ncap and wrf dataframes.')
+        logger.info('Starting line graphic for gfs, ncap and wrf dataframes.')
 
-        print(dfgfs.head(5))
-        print(dfncap.head(5))
-        print(dfwrf.head(5))
-
-        exit(0)
+        Line_graphic(dfgfs, dfncap, dfwrf, settings.outputlinegraphic, logger, verbose).run()
 
     return

@@ -7,6 +7,10 @@ class Settings:
         self.ncapsource = "/input/NCAP/"
         self.wrfsource = "/input/TempoOK_WRF12km/"
 
+        # Settings of graphics kinds
+        self.linegraphic = False
+        self.outputlinegraphic = "/figures/line_graphics/"
+
         # End settings of file source
 
     @property
@@ -14,29 +18,45 @@ class Settings:
         return self.__filesource
 
     @filesource.setter
-    def filesource(self, file):
-        self.__filesource = file
+    def filesource(self, _file):
+        self.__filesource = _file
 
     @property
     def gfssource(self):
         return self.__gfssource
 
     @gfssource.setter
-    def gfssource(self, path):
-        self.__gfssource = path
+    def gfssource(self, _path):
+        self.__gfssource = _path
 
     @property
     def ncapsource(self):
         return self.__ncapsource
 
     @ncapsource.setter
-    def ncapsource(self, path):
-        self.__ncapsource = path
+    def ncapsource(self, _path):
+        self.__ncapsource = _path
 
     @property
     def wrfsource(self):
         return self.__wrfsource
 
     @wrfsource.setter
-    def wrfsource(self, path):
-        self.__wrfsource = path
+    def wrfsource(self, _path):
+        self.__wrfsource = _path
+
+    @property
+    def linegraphic(self):
+        return self.__linegraphic
+
+    @linegraphic.setter
+    def linegraphic(self, _linegraphic):
+        self.__linegraphic = _linegraphic
+
+    @property
+    def outputlinegraphic(self):
+        return self.__outputlinegraphic
+
+    @outputlinegraphic.setter
+    def outputlinegraphic(self, _path):
+        self.__outputlinegraphic = _path

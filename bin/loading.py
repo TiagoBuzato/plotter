@@ -59,14 +59,20 @@ class Loading():
 
             # Remove columns it's not will used
             df = df.drop(['date', 'time', 'Data', 'Hora'], axis=1)
+            df = df.drop(df.columns[1], axis=1)
 
             # Create column with name of tower
-            towername = df.columns[1].split('_')[-1]
+            towername = df.columns[0].split('_')[-1]
             df['tower'] = towername
 
             # Rename Column wind speed and wind direction
             df.rename(columns={df.columns[0]: 'speed_gfs'}, inplace=True)
-            df.rename(columns={df.columns[1]: 'direction_gfs'}, inplace=True)
+
+            # replace comma to dot
+            df['speed_gfs'] = df['speed_gfs'].apply(lambda x: x.replace(',', '.'))
+
+            # Convert string to float with 2 decimal houses
+            df['speed_gfs'] = df['speed_gfs'].apply(lambda x: round(float(x), 2))
 
             # Join dataframe for create just one
             dfgfs = pd.concat([df, dfgfs], sort=False)
@@ -102,14 +108,20 @@ class Loading():
 
             # Remove columns it's not will used
             df = df.drop(['date', 'time', 'Data', 'Hora'], axis=1)
+            df = df.drop(df.columns[1], axis=1)
 
             # Create column with name of tower
-            towername = df.columns[1].split('_')[-1]
+            towername = df.columns[0].split('_')[-1]
             df['tower'] = towername
 
             # Rename Column wind speed and wind direction
             df.rename(columns={df.columns[0]: 'speed_ncap'}, inplace=True)
-            df.rename(columns={df.columns[1]: 'direction_ncap'}, inplace=True)
+
+            # replace comma to dot
+            df['speed_ncap'] = df['speed_ncap'].apply(lambda x: x.replace(',', '.'))
+
+            # Convert string to float with 2 decimal houses
+            df['speed_ncap'] = df['speed_ncap'].apply(lambda x: round(float(x), 2))
 
             # Join dataframe for create just one
             dfncap = pd.concat([df, dfncap], sort=False)
@@ -148,14 +160,20 @@ class Loading():
 
             # Remove columns it's not will used
             df = df.drop(['date', 'time', 'Data', 'Hora'], axis=1)
+            df = df.drop(df.columns[1], axis=1)
 
             # Create column with name of tower
-            towername = df.columns[1].split('_')[-1]
+            towername = df.columns[0].split('_')[-1]
             df['tower'] = towername
 
             # Rename Column wind speed and wind direction
             df.rename(columns={df.columns[0]: 'speed_wrf'}, inplace=True)
-            df.rename(columns={df.columns[1]: 'direction_wrf'}, inplace=True)
+
+            # replace comma to dot
+            df['speed_wrf'] = df['speed_wrf'].apply(lambda x: x.replace(',', '.'))
+
+            # Convert string to float with 2 decimal houses
+            df['speed_wrf'] = df['speed_wrf'].apply(lambda x: round(float(x), 2))
 
             # Join dataframe for create just one
             dfwrf = pd.concat([df, dfwrf], sort=False)
@@ -178,5 +196,12 @@ class Loading():
 
         # Loading wrf files to dataframe
         dfwrf = self.loading_wrf(self.wrfsource, self.verbose)
+
+        # # dfgfs = pd.DataFrame({'pig': [20, 18, 489, 675, 1776],'horse': [4, 25, 281, 600, 1900]},
+        # #                      index=[1990, 1997, 2003, 2009, 2014])
+        # # dfncap = pd.DataFrame({'pig': [15, 20, 600, 350, 2000], 'horse': [18, 55, 150, 700, 3000]},
+        # #                       index=[1990, 1997, 2003, 2009, 2014])
+        # dfwrf = pd.DataFrame({'pig': [8, 60, 800, 475, 1900], 'horse': [12, 33, 200, 900, 1500]},
+        #                      index=[1990, 1997, 2003, 2009, 2014])
 
         return dfgfs, dfncap, dfwrf
